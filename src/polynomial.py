@@ -15,7 +15,7 @@ class QuadraticPolynomial:
         self.c = c
 
     def evaluate(self, x: float) -> float:
-        return self.a * x ** 2 + self.b * x + self.c
+        return self.a * x**2 + self.b * x + self.c
 
     def degree(self) -> int:
         return 2
@@ -28,13 +28,16 @@ class QuinticPolynomial:
         self.coefficients = coefficients
 
     def evaluate(self, x: float) -> float:
-        return sum([c * x ** i for i, c in enumerate(self.coefficients)])
+        return sum([c * x**i for i, c in enumerate(self.coefficients)])
 
     def degree(self) -> int:
         return 5
 
+
 ## Generic root finding algorithm applicable to all polynomials
-def find_root_bisection(p: Polynomial, a: float, b:float, epsilon:float = 1e-6) -> float:
+def find_root_bisection(
+    p: Polynomial, a: float, b: float, epsilon: float = 1e-6
+) -> float:
     if p.evaluate(a) * p.evaluate(b) > 0:
         raise ValueError("Root not guaranteed to exist in interval")
     while b - a > epsilon:
@@ -47,4 +50,3 @@ def find_root_bisection(p: Polynomial, a: float, b:float, epsilon:float = 1e-6) 
             a = midpoint
 
     return (a + b) / 2
-

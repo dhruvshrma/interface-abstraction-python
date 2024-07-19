@@ -1,4 +1,9 @@
-from src.polynomial import Polynomial, QuadraticPolynomial, QuinticPolynomial, find_root_bisection
+from src.polynomial import (
+    Polynomial,
+    QuadraticPolynomial,
+    QuinticPolynomial,
+    find_root_bisection,
+)
 
 
 def test_protocol_is_implemented():
