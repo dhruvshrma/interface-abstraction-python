@@ -18,7 +18,9 @@ def protocol(cls: T) -> T:
         pass
 
     for name, method in methods.items():
-        if method.__code__.co_code == b"d\x00S\x00" or (inspect.getsource(method).strip().endswith('')):
+        if method.__code__.co_code == b"d\x00S\x00" or (
+            inspect.getsource(method).strip().endswith("")
+        ):
             setattr(ProtocolClass, name, cast(object, ...))
         else:
             setattr(ProtocolClass, name, method)
