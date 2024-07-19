@@ -12,7 +12,7 @@ class Polynomial:
     def degree(self) -> int:
         pass
 
-    def derivative(self) -> 'Polynomial':
+    def derivative(self) -> "Polynomial":
         pass
 
 
@@ -23,11 +23,12 @@ class PolynomialOfDegreeN(Polynomial, ABC):
     def evaluate(self, x: float) -> float:
         ## This should be in the reverse order
         return sum([c * x**i for i, c in enumerate(self.coefficients)])
+
     @abstractmethod
     def degree(self) -> int:
         pass
 
-    def derivative(self) -> 'Polynomial':
+    def derivative(self) -> "Polynomial":
         new_coeffs = [i * c for i, c in enumerate(self.coefficients[1:], start=1)]
         return type(self)(new_coeffs)
 
@@ -39,6 +40,7 @@ class PolynomialOfDegreeN(Polynomial, ABC):
 class QuadraticPolynomial(PolynomialOfDegreeN):
     def degree(self) -> int:
         return 2
+
 
 class CubicPolynomial(PolynomialOfDegreeN):
     def degree(self) -> int:

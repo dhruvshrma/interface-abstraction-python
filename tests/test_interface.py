@@ -54,6 +54,7 @@ def test_protocol_decorator():
     assert issubclass(EmptySubProtocol, Protocol)
     assert not issubclass(EmptySubProtocol2, Protocol)
 
+
 def test_derivative_is_polynomial():
     quad = QuadraticPolynomial([1, 2, 3])
     assert isinstance(quad.derivative(), Polynomial)
