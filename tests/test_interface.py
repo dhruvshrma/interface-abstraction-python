@@ -24,7 +24,6 @@ class EmptySubProtocol2:
     def degree(self) -> int:
         pass  # type: ignore
 
-
 def test_protocol_is_implemented():
     quad = QuadraticPolynomial(1, 2, 3)
     assert isinstance(quad, Polynomial)
