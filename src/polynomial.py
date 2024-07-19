@@ -1,12 +1,11 @@
 from typing import Protocol, List, runtime_checkable
-
+from src.protocol import protocol
 
 ## The Family of all polynomials
-@runtime_checkable
-class Polynomial(Protocol):
-    def evaluate(self, x: float) -> float: ...
-    def degree(self) -> int: ...
-
+@protocol
+class Polynomial:
+    def evaluate(self, x: float) -> float: pass
+    def degree(self) -> int: pass
 
 class QuadraticPolynomial:
     def __init__(self, a: float, b: float, c: float) -> None:
