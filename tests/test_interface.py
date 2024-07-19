@@ -6,16 +6,25 @@ from src.polynomial import (
 )
 from typing import Protocol
 from src.protocol import protocol
+
+
 @protocol
 class EmptySubProtocol:
-    def evaluate(self, x: float) -> float: pass   # type: ignore
+    def evaluate(self, x: float) -> float:
+        pass  # type: ignore
 
-    def degree(self) -> int: pass  # type: ignore
+    def degree(self) -> int:
+        pass  # type: ignore
+
 
 class EmptySubProtocol2:
-    def evaluate(self, x: float) -> float: pass   # type: ignore
+    def evaluate(self, x: float) -> float:
+        pass  # type: ignore
 
-    def degree(self) -> int: pass  # type: ignore
+    def degree(self) -> int:
+        pass  # type: ignore
+
+
 def test_protocol_is_implemented():
     quad = QuadraticPolynomial(1, 2, 3)
     assert isinstance(quad, Polynomial)
@@ -36,8 +45,8 @@ def test_root_finding_works():
     root = find_root_bisection(quad, 1, 4)
     assert abs(root - 2) < 1e-6
 
+
 def test_protocol_decorator():
     # check that it is of type Protocol
     assert issubclass(EmptySubProtocol, Protocol)
     assert not issubclass(EmptySubProtocol2, Protocol)
-
