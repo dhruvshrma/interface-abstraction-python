@@ -25,7 +25,7 @@ class EmptySubProtocol2:
         pass  # type: ignore
 
 def test_protocol_is_implemented():
-    quad = QuadraticPolynomial(1, 2, 3)
+    quad = QuadraticPolynomial([1, 2, 3])
     assert isinstance(quad, Polynomial)
     assert isinstance(QuinticPolynomial([1, 2, 3, 4, 5, 6]), Polynomial)
 
@@ -40,8 +40,11 @@ def test_subprotocol():
 
 
 def test_root_finding_works():
-    quad = QuadraticPolynomial(1, 0, -4)
+    quad = QuadraticPolynomial([-4, 0, 1])
+    # use repr to print the polynomial
+    # assert repr(quad) == "1x^0 + 0x^1 + -4x^2"
     root = find_root_bisection(quad, 1, 4)
+    print(quad)
     assert abs(root - 2) < 1e-6
 
 
@@ -49,3 +52,8 @@ def test_protocol_decorator():
     # check that it is of type Protocol
     assert issubclass(EmptySubProtocol, Protocol)
     assert not issubclass(EmptySubProtocol2, Protocol)
+
+def test_derivative_is_polynomial():
+    quad = QuadraticPolynomial([1, 2, 3])
+    assert isinstance(quad.derivative(), Polynomial)
+    assert isinstance(quad.derivative(), QuadraticPolynomial)

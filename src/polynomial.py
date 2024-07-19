@@ -1,5 +1,6 @@
 from typing import Protocol, List, runtime_checkable
 from src.protocol import protocol
+from abc import ABC, abstractmethod
 
 
 ## The Family of all polynomials
@@ -11,29 +12,40 @@ class Polynomial:
     def degree(self) -> int:
         pass
 
-
-class QuadraticPolynomial:
-    def __init__(self, a: float, b: float, c: float) -> None:
-        self.a = a
-        self.b = b
-        self.c = c
-
-    def evaluate(self, x: float) -> float:
-        return self.a * x**2 + self.b * x + self.c
-
-    def degree(self) -> int:
-        return 2
+    def derivative(self) -> 'Polynomial':
+        pass
 
 
-class QuinticPolynomial:
+class PolynomialOfDegreeN(Polynomial, ABC):
     def __init__(self, coefficients: List[float]) -> None:
-        if len(coefficients) != 6:
-            raise ValueError("QuinticPolynomial must have 6 coefficients")
         self.coefficients = coefficients
 
     def evaluate(self, x: float) -> float:
+        ## This should be in the reverse order
         return sum([c * x**i for i, c in enumerate(self.coefficients)])
+    @abstractmethod
+    def degree(self) -> int:
+        pass
 
+    def derivative(self) -> 'Polynomial':
+        new_coeffs = [i * c for i, c in enumerate(self.coefficients[1:], start=1)]
+        return type(self)(new_coeffs)
+
+    def __repr__(self):
+        ## print the polynomial expansion using the coefficients
+        return " + ".join([f"{c}x^{i}" for i, c in enumerate(self.coefficients)])
+
+
+class QuadraticPolynomial(PolynomialOfDegreeN):
+    def degree(self) -> int:
+        return 2
+
+class CubicPolynomial(PolynomialOfDegreeN):
+    def degree(self) -> int:
+        return 3
+
+
+class QuinticPolynomial(PolynomialOfDegreeN):
     def degree(self) -> int:
         return 5
 
